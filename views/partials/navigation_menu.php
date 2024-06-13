@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nxl-item nxl-hasmenu">
-                    <a href="javascript:void(0);" class="nxl-link">
+                    <a href="kuisioner.php" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-airplay"></i></span>
                         <span class="nxl-mtext">Question</span>
                     </a>

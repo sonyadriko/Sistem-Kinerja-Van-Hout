@@ -26,8 +26,8 @@
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Data Area</h5>
-                                <a href="add_data.php" class="btn btn-success btn-user">Tambah Data Area</a>
+                                <h5 class="card-title">Data Pertanyaan</h5>
+                                <a href="add_data.php" class="btn btn-success btn-user">Tambah Data Pertanyaan</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -41,7 +41,7 @@
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            $get_data = mysqli_query($conn, "select * from area");
+                                            $get_data = mysqli_query($conn, "select * from kuisioner");
                                             while($display = mysqli_fetch_array($get_data)) {
                                                 $id = $display['id_area'];
                                                 $name = $display['nama_area'];                                            
