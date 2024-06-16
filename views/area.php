@@ -27,7 +27,7 @@
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Data Area</h5>
-                                <a href="add_data.php" class="btn btn-success btn-user">Tambah Data Area</a>
+                                <!-- <a href="add_data.php" class="btn btn-success btn-user">Tambah Data Area</a> -->
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -35,7 +35,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Action</th>
+                                                <!-- <th>Action</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -48,14 +48,14 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $name; ?></td>
-                                                <td>
+                                                <!-- <td>
                                                     <div class="action-buttons">
                                                         <a href='edit_data.php?GetID=<?php echo $id; ?>'
                                                             class="btn btn-primary btn-user">Ubah</a>
                                                         <a href='delete_data.php?Del=<?php echo $id; ?>'
                                                             class="btn btn-danger btn-user">Hapus</a>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             <?php
                                             $no++;

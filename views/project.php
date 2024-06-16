@@ -34,8 +34,8 @@
                                     <table id="areaTable" class="table table-hover table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>User</th>
-                                                <th>Project</th>
+                                                <!-- <th>User</th> -->
+                                                <th>Nama Project</th>
                                                 <th>Link</th>
                                                 <th>Action</th>
                                             </tr>
@@ -51,16 +51,21 @@
                                                 $unique_link = $display['link'];
                                             ?>
                                             <tr>
-                                                <td><?php echo $userId; ?></td>
+                                                <!-- <td><?php echo $userId; ?></td> -->
                                                 <td><?php echo $name; ?></td>
-                                                <td><?php echo  "https://localhost/survey.php?link=" .
+                                                <td><?php echo  "https://localhost/van_hout/views/survey.php?link=" .
                                             $unique_link; ?></td>
                                                 <td>
                                                     <div class="action-buttons">
-                                                        <a href='edit_data.php?GetID=<?php echo $id; ?>'
+                                                        <a href='ubah_project.php?GetID=<?php echo $id; ?>'
                                                             class="btn btn-primary btn-user">Ubah</a>
-                                                        <button class="btn btn-danger btn-user delete-btn"
-                                                            data-id="<?php echo $id; ?>">Hapus</button>
+                                                        <!-- <button class="btn btn-danger btn-user delete-btn"
+                                                            data-id="<?php echo $id; ?>">Hapus</button> -->
+                                                        <button
+                                                            onclick="copyToClipboard('https://localhost/van_hout/views/survey.php?link=<?php echo $unique_link; ?>')"
+                                                            class="btn btn-warning btn-user">Share</button>
+                                                        <a href='report.php?GetID=<?php echo $id; ?>'
+                                                            class="btn btn-success btn-user">Report</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -156,6 +161,26 @@
             });
         });
     });
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Link berhasil disalin ke clipboard.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }, function(err) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: 'Gagal menyalin link.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        });
+    }
     </script>
 </body>
 
