@@ -35,6 +35,7 @@ $areas = $areas_result->fetch_all(MYSQLI_ASSOC);
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Laporan Project</h5>
+                                <a href="hasil.php" class="btn btn-success btn-user">Hasil</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">

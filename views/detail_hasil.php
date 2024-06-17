@@ -46,6 +46,20 @@ if (isset($_GET['area_id'])) {
         'Setuju' => 4,
         'Sangat Setuju' => 5
     ];
+      // Menghitung rata-rata untuk setiap pertanyaan
+      $rata_rata_jawaban = [];
+      foreach ($pertanyaan_data as $pertanyaan) {
+          $total = 0;
+          $count = 0;
+          foreach ($responden_jawaban as $data) {
+              if (isset($data['jawaban'][$pertanyaan['id_kuesioner']])) {
+                  $jawaban_nilai = $jawaban_mapping[$data['jawaban'][$pertanyaan['id_kuesioner']]];
+                  $total += $jawaban_nilai;
+                  $count++;
+              }
+          }
+          $rata_rata_jawaban[$pertanyaan['id_kuesioner']] = $count > 0 ? $total / $count : 0;
+      }
 } else {
     echo "ID area tidak ditemukan.";
     exit();
@@ -118,6 +132,12 @@ if (isset($_GET['area_id'])) {
                                                 <?php } ?>
                                             </tr>
                                             <?php } ?>
+                                            <td colspan="2"><strong>Rata-rata</strong></td>
+                                            <?php foreach ($pertanyaan_data as $pertanyaan) { ?>
+                                            <td><strong><?php echo number_format($rata_rata_jawaban[$pertanyaan['id_kuesioner']], 2); ?></strong>
+                                            </td>
+                                            <?php } ?>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <br>
