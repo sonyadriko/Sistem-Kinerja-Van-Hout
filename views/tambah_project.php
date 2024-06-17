@@ -8,7 +8,7 @@ session_start(); ?>
     <?php include 'partials/scripts.php' ?>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <title>Area</title>
+    <title>Tambah Project</title>
     <style>
     .action-buttons {
         display: flex;
@@ -35,7 +35,7 @@ session_start(); ?>
                                     <div class="mb-4">
                                         <label class="form-label">Nama Project :</label>
                                         <input type="text" class="form-control" name="project"
-                                            placeholder="Pertanyaan...">
+                                            placeholder="Nama Project...">
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>

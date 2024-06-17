@@ -1,4 +1,10 @@
-<?php include '../config/database.php'; ?>
+<?php 
+include '../config/database.php';
+session_start();
+
+if (!isset($_SESSION['id_users'])) {
+    header("Location: login.php");
+}?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -46,7 +52,7 @@
                                             while($display = mysqli_fetch_array($get_data)) {
                                                 $id = $display['id_users'];
                                                 $name = $display['nama'];
-                                                $email = $display['username'];
+                                                $email = $display['email'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $email; ?></td>

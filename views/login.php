@@ -7,9 +7,6 @@
 </head>
 
 <body>
-    <!--! ================================================================ !-->
-    <!--! [Start] Main Content !-->
-    <!--! ================================================================ !-->
     <main class="auth-minimal-wrapper">
         <div class="auth-minimal-inner">
             <div class="minimal-card-wrapper">
@@ -21,12 +18,13 @@
                     <div class="card-body p-sm-5">
                         <h2 class="fs-20 fw-bolder mb-4">Login</h2>
                         <h4 class="fs-13 fw-bold mb-2">Login to your account</h4>
-                        <p class="fs-12 fw-medium text-muted">Thank you for get back <strong>Van Hout</strong> web
-                            applications, let's access our the best recommendation for you.</p>
-                        <form action="login.php" method="POST" class="w-100 mt-4 pt-2">
+                        <p class="fs-12 fw-medium text-muted">Thank you for getting back to <strong>Van Hout</strong>
+                            web
+                            applications, let's access our best recommendations for you.</p>
+                        <form id="loginForm" class="w-100 mt-4 pt-2">
                             <div class="mb-4">
-                                <input type="text" name="username" id="username" class="form-control"
-                                    placeholder="Username" required>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email"
+                                    required>
                             </div>
                             <div class="mb-3">
                                 <input type="password" name="password" id="password" class="form-control"
@@ -37,84 +35,51 @@
                                     class="btn btn-lg w-100">Login</button>
                             </div>
                         </form>
-                        <div class="mt-5 text-muted">
-                            <span> Don't have an account?</span>
-                            <a href="auth-register-minimal.html" class="fw-bold">Create an Account</a>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!--! BEGIN: Vendors JS !-->
     <script src="../assets/vendors/js/vendors.min.js"></script>
     <script src="../assets/js/common-init.min.js"></script>
     <script src="../assets/js/theme-customizer-init.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
 
-</html>
-<?php
-    include '../config/database.php';
-
-    session_start();
-
-    if (isset($_SESSION['id_users'], $_SESSION['nama'])) {
-        header("Location: index.php");
-        exit();
-    }
-
-    if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = $_POST['username'];
-        $password = md5($_POST['password']);
-
-        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows == 1) {
-            $row = $result->fetch_assoc();
-
-            if ($password == $row['password']) {
-                $_SESSION['id_users'] = $row['id_users'];
-                $_SESSION['nama'] = $row['nama'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['role'] = $row['role'];
-
-                echo "<script>
+        fetch('proses_login.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text()) // change to text to inspect the raw response
+            .then(data => {
+                console.log('Raw response:', data); // Log the raw response
+                const jsonData = JSON.parse(data); // Parse the JSON data
+                if (jsonData.success) {
                     Swal.fire({
                         title: 'Login Berhasil',
                         icon: 'success'
                     }).then(() => {
-                        location='index.php';
+                        location = 'index.php';
                     });
-                </script>";
-            } else {
-                echo "<script>
+                } else {
                     Swal.fire({
                         title: 'Login Gagal',
-                        text: 'Username dan Password Salah',
+                        text: jsonData.message,
                         icon: 'error'
                     }).then(() => {
                         history.back();
                     });
-                </script>";
-            }
-        } else {
-            echo "<script>
-                Swal.fire({
-                    title: 'Login Gagal',
-                    text: 'Username dan Password Salah',
-                    icon: 'error'
-                }).then(() => {
-                    history.back();
-                });
-            </script>";
-        }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+    </script>
+</body>
 
-        $stmt->close();
-        $conn->close();
-    }
-?>
+</html>

@@ -19,6 +19,7 @@
                         <span class="nxl-mtext">Dashboards</span>
                     </a>
                 </li>
+                <?php if($_SESSION['role'] == "admin") { ?>
                 <li class="nxl-item nxl-hasmenu">
                     <a href="area.php" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-map"></i></span>
@@ -43,6 +44,14 @@
                         <span class="nxl-mtext">Users</span>
                     </a>
                 </li>
+                <?php } elseif($_SESSION['role'] == "auditor") { ?>
+                <li class="nxl-item nxl-hasmenu">
+                    <a href="project.php" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-layers"></i></span>
+                        <span class="nxl-mtext">Project</span>
+                    </a>
+                </li>
+                <?php } ?>
                 <!-- <li class="nxl-item nxl-hasmenu">
                     <a href="javascript:void(0);" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-cast"></i></span>

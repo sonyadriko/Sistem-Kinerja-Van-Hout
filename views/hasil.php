@@ -84,7 +84,7 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
     <?php include 'partials/scripts.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil Perhitungan Kematangan</title>
+    <title>Hasil Perhitungan</title>
     <style>
     table {
         width: 100%;

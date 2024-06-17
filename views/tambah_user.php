@@ -1,6 +1,6 @@
-<?php include '../config/database.php';
-session_start();
-?>
+<?php 
+include '../config/database.php'; 
+session_start(); ?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -8,7 +8,7 @@ session_start();
     <?php include 'partials/scripts.php' ?>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <title>Tambah Pertanyaan</title>
+    <title>Tambah User</title>
     <style>
     .action-buttons {
         display: flex;
@@ -28,26 +28,24 @@ session_start();
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Tambah Pertanyaan</h5>
+                                <h5 class="card-title">Tambah Project</h5>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="tambah_pertanyaan.php" id="formTambahPertanyaan">
-                                    <div class=" mb-4">
-                                        <label class="form-label">Area :</label>
-                                        <select class="form-select form-control" name="area_id"
-                                            data-select2-selector="tag1">
-                                            <?php
-                                            $areas = mysqli_query($conn, "SELECT * FROM area");
-                                            while($row = mysqli_fetch_assoc($areas)) {
-                                                echo "<option value='" . $row['id_area'] . "' data-bg='" . $row['area_color'] . "'>" . $row['nama_area'] . "</option>";
-                                            }
-                                            ?>
-                                        </select>
+                                <form method="POST" action="tambah_user.php" id="formTambahPertanyaan">
+                                    <div class="mb-4">
+                                        <label class="form-label">Nama:</label>
+                                        <input type="text" class="form-control" name="nama"
+                                            placeholder="Masukkan Nama...">
                                     </div>
                                     <div class="mb-4">
-                                        <label class="form-label">Pertanyaan :</label>
-                                        <input type="text" class="form-control" name="pertanyaan"
-                                            placeholder="Pertanyaan...">
+                                        <label class="form-label">Email:</label>
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="Masukkan Email...">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Password:</label>
+                                        <input type="password" class="form-control" name="password"
+                                            placeholder="Masukkan Password...">
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -76,42 +74,6 @@ session_start();
     <!--! END: Apps Init !-->
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script>
-    document.getElementById('formTambahPertanyaan').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var form = this;
-        var formData = new FormData(form);
-
-        fetch(form.action, {
-                method: form.method,
-                body: formData
-            })
-            .then(response => response.json()) // Directly parse the response as JSON
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: 'Data saved successfully.'
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'Error: ' + data.message
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while saving the data.'
-                });
-            });
-    });
-    </script> -->
 
 </body>
 
@@ -121,12 +83,13 @@ include '../config/database.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the data from the form
-    $areaId = $_POST['area_id'];
-    $pertanyaan = $_POST['pertanyaan'];
-
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $role = "auditor";
     // Prepare the SQL statement to avoid SQL injection
-    $stmt = $conn->prepare("INSERT INTO kuesioner (area_id, pertanyaan) VALUES (?, ?)");
-    $stmt->bind_param("is", $areaId, $pertanyaan);
+    $stmt = $conn->prepare("INSERT INTO users (nama, email, password, role) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nama, $email, $password, $role);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -141,10 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Swal.fire({
             icon: 'success',
             title: 'Berhasil!',
-            text: 'Berhasil menambah pertanyaan.',
+            text: 'Berhasil menambah user.',
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'kuesioner.php';
+                window.location.href = 'users.php';
             }
         });";
         echo "</script>";

@@ -1,5 +1,6 @@
 <?php
 include '../config/database.php';
+session_start(); 
 
 // Cek apakah parameter 'GetID' ada di URL
 if (isset($_GET['GetID'])) {

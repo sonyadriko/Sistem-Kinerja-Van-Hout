@@ -1,6 +1,6 @@
 <?php 
 include '../config/database.php'; 
-
+session_start(); 
 // Ambil data area
 $areas_result = $conn->query("SELECT * FROM area");
 $areas = $areas_result->fetch_all(MYSQLI_ASSOC);

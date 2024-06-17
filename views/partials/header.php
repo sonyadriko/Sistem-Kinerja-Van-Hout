@@ -61,9 +61,15 @@
                             <div class="d-flex align-items-center">
                                 <img src="../assets/images/avatar.png" alt="user-image" class="img-fluid user-avtar" />
                                 <div>
-                                    <h6 class="text-dark mb-0">Alexandra Della <span
-                                            class="badge bg-soft-success text-success ms-1">PRO</span></h6>
-                                    <span class="fs-12 fw-medium text-muted">alex.della@outlook.com</span>
+                                    <?php 
+                                        $nama = isset($_SESSION['nama']) ? $_SESSION['nama'] : 'Guest';
+                                        $role = isset($_SESSION['role']) ? $_SESSION['role'] : 'Trial';
+                                        $email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Trial@gmail.com';
+                                    ?>
+                                    <h6 class="text-dark mb-0"><?php echo $nama ?> <span
+                                            class="badge bg-soft-success text-success ms-1"><?php echo $role ?></span>
+                                    </h6>
+                                    <span class="fs-12 fw-medium text-muted"><?php echo $email?></span>
                                 </div>
                             </div>
                         </div>

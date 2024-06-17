@@ -1,3 +1,11 @@
+<?php 
+include '../config/database.php';
+session_start();
+
+if (!isset($_SESSION['id_users'])) {
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -29,8 +37,43 @@
             <!-- [ Main Content ] start -->
             <div class="main-content">
                 <div class="row">
-                    <!-- [Invoices Awaiting Payment] start -->
-                    <div class="col-xxl-3 col-md-6">
+                    <div class="col-lg-12">
+                        <div class="card stretch stretch-full">
+
+                            <div class="card-body">
+                                <p style="font-size: medium;"><strong>Metode Van Hout</strong> merupakan salah satu
+                                    pendekatan
+                                    statistik yang
+                                    digunakan untuk menentukan ukuran sampel yang dibutuhkan dalam penelitian. Tujuan
+                                    utamanya adalah untuk memastikan bahwa sampel yang diambil cukup besar sehingga
+                                    hasil penelitian dapat dianggap mewakili populasi yang lebih besar dengan tingkat
+                                    kepercayaan tertentu. Metode ini bergantung pada beberapa faktor kunci, seperti
+                                    tingkat error toleransi (<em>e</em>), deviasi standar dari variabel yang diteliti
+                                    (<em>σ</em>), dan level kepercayaan (<em>z</em>) yang dipilih. Dengan menggunakan
+                                    rumus matematis yang telah ditetapkan, peneliti dapat menghitung jumlah sampel yang
+                                    diperlukan. Hasil perhitungan ini membantu memastikan bahwa data yang dikumpulkan
+                                    memiliki akurasi yang memadai untuk mengambil kesimpulan yang dapat dipercaya dari
+                                    populasi yang lebih besar.</p>
+
+                                <p style="font-size: medium;"><strong>Metode Van Hout</strong> penting dalam penelitian
+                                    ilmiah karena memberikan
+                                    landasan yang kuat untuk menentukan ukuran sampel yang optimal, menghindari sampel
+                                    yang terlalu kecil yang dapat menghasilkan generalisasi yang tidak akurat atau
+                                    terlalu besar yang memboroskan sumber daya. Dengan mempertimbangkan variabilitas
+                                    dalam data dan tingkat keyakinan yang diinginkan, peneliti dapat mengoptimalkan
+                                    desain studi mereka untuk mencapai hasil yang dapat diandalkan. Meskipun metode ini
+                                    memberikan panduan yang bermanfaat, penting untuk mempertimbangkan karakteristik
+                                    unik dari masalah penelitian dan populasi yang diteliti untuk mengadaptasi metode
+                                    ini dengan tepat guna.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-xxl-3 col-md-6">
                         <div class="card stretch stretch-full">
                             <div class="card-body">
                                 <div class="d-flex align-items-start justify-content-between mb-4">
@@ -66,9 +109,8 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
-                    <!-- [Invoices Awaiting Payment] end -->
-                    <!-- [Converted Leads] start -->
                     <div class="col-xxl-3 col-md-6">
                         <div class="card stretch stretch-full">
                             <div class="card-body">
@@ -104,8 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- [Converted Leads] end -->
-                    <!-- [Projects In Progress] start -->
+
                     <div class="col-xxl-3 col-md-6">
                         <div class="card stretch stretch-full">
                             <div class="card-body">
@@ -142,8 +183,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- [Projects In Progress] end -->
-                    <!-- [Conversion Rate] start -->
+
                     <div class="col-xxl-3 col-md-6">
                         <div class="card stretch stretch-full">
                             <div class="card-body">
@@ -178,14 +218,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- [Conversion Rate] end -->
-                </div>
-            </div>
-            <!-- [ Main Content ] end -->
+                    </div> -->
+        </div>
+        </div>
+        <!-- [ Main Content ] end -->
         </div>
         <!-- [ Footer ] start -->
-        <?php include 'partials/footer.php' ?>
+        <?php 
+        // include 'partials/footer.php'
+         ?>
         <!-- [ Footer ] end -->
     </main>
     <!--! ================================================================ !-->

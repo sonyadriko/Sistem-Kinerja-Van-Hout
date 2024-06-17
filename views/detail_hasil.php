@@ -1,5 +1,6 @@
 <?php
 include '../config/database.php';
+session_start(); 
 
 if (isset($_GET['area_id'])) {
     $area_id = $_GET['area_id'];

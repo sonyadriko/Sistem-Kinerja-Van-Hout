@@ -1,4 +1,6 @@
-<?php include '../config/database.php' ?>
+<?php include '../config/database.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -6,7 +8,7 @@
     <?php include 'partials/scripts.php' ?>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <title>Area</title>
+    <title>Kuesioner</title>
     <style>
     .action-buttons {
         display: flex;
