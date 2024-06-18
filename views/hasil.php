@@ -1,8 +1,9 @@
 <?php
 include '../config/database.php';
+session_start();
 
-// Ambil semua data
-$stmt = $conn->prepare('SELECT * FROM jawaban j JOIN kuesioner k ON j.kuesioner_id = k.id_kuesioner');
+// Ambil semua data jawaban, kuesioner, dan area
+$stmt = $conn->prepare('SELECT j.*, k.pertanyaan, k.area_id, a.nama_area FROM jawaban j LEFT JOIn kuesioner k ON j.kuesioner_id = k.id_kuesioner JOIN area a ON k.area_id = a.id_area');
 $stmt->execute();
 $jawaban_result = $stmt->get_result();
 $jawaban_data = $jawaban_result->fetch_all(MYSQLI_ASSOC);
@@ -32,36 +33,34 @@ foreach ($skor_pertanyaan as $kuesioner_id => $skors) {
     $nilai_kematangan_atribut[$kuesioner_id] = array_sum($skors) / count($skors);
 }
 
-// Mengelompokkan pertanyaan berdasarkan variabel
-$variabel_mapping = [
-    'Intention and Support' => [1, 2, 3, 4], // Gantilah sesuai dengan id_kuesioner untuk variabel ini
-    'Working Relationship' => [5, 6, 7, 8],
-    'Shared Knowledge' => [9, 10, 11, 12],
-    'IT Project and Planning' => [13, 14, 15, 16],
-    'IT Performance' => [17, 18, 19, 20],
-];
-
-$nilai_kematangan_variabel = [];
-foreach ($variabel_mapping as $variabel => $kuesioner_ids) {
-    $total_skor = 0;
-    $jumlah_pertanyaan = 0;
-    foreach ($kuesioner_ids as $kuesioner_id) {
-        if (isset($nilai_kematangan_atribut[$kuesioner_id])) {
-            $total_skor += $nilai_kematangan_atribut[$kuesioner_id];
-            $jumlah_pertanyaan++;
-        }
+// Mengelompokkan pertanyaan berdasarkan area
+$area_mapping = [];
+foreach ($jawaban_data as $jawaban) {
+    $area_name = $jawaban['nama_area'];
+    $kuesioner_id = $jawaban['kuesioner_id'];
+    if (!isset($area_mapping[$area_name])) {
+        $area_mapping[$area_name] = [];
     }
+    if (isset($nilai_kematangan_atribut[$kuesioner_id])) {
+        $area_mapping[$area_name][$kuesioner_id] = $nilai_kematangan_atribut[$kuesioner_id];
+    }
+}
+
+$nilai_kematangan_area = [];
+foreach ($area_mapping as $area_name => $kuesioner_data) {
+    $total_skor = array_sum($kuesioner_data);
+    $jumlah_pertanyaan = count($kuesioner_data);
     if ($jumlah_pertanyaan > 0) {
-        $nilai_kematangan_variabel[$variabel] = $total_skor / $jumlah_pertanyaan;
+        $nilai_kematangan_area[$area_name] = $total_skor / $jumlah_pertanyaan;
     } else {
-        $nilai_kematangan_variabel[$variabel] = 0;
+        $nilai_kematangan_area[$area_name] = 0;
     }
 }
 
 // Menghitung nilai kematangan perusahaan
-$total_nilai_kematangan = array_sum($nilai_kematangan_variabel);
-$jumlah_variabel = count($nilai_kematangan_variabel);
-$nilai_kematangan_perusahaan = $total_nilai_kematangan / $jumlah_variabel;
+$total_nilai_kematangan = array_sum($nilai_kematangan_area);
+$jumlah_area = count($nilai_kematangan_area);
+$nilai_kematangan_perusahaan = $jumlah_area > 0 ? $total_nilai_kematangan / $jumlah_area : 0;
 
 // Menentukan level kematangan berdasarkan nilai kematangan perusahaan
 if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
@@ -75,7 +74,6 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
 } elseif ($nilai_kematangan_perusahaan == 5.0) {
     $level_kematangan = 5;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -127,6 +125,7 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
                                             <tr>
                                                 <th>Nomor</th>
                                                 <th>Pertanyaan</th>
+                                                <th>Area</th>
                                                 <th>Nilai Kematangan Atribut</th>
                                             </tr>
                                         </thead>
@@ -143,6 +142,7 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
                                             <tr>
                                                 <td><?php echo $no; ?></td>
                                                 <td><?php echo htmlspecialchars($jawaban['pertanyaan']); ?></td>
+                                                <td><?php echo htmlspecialchars($jawaban['nama_area']); ?></td>
                                                 <td><?php echo number_format($nilai_kematangan_atribut[$kuesioner_id], 2); ?>
                                                 </td>
                                             </tr>
@@ -157,14 +157,14 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
                                     <table border="1">
                                         <thead>
                                             <tr>
-                                                <th>Variabel</th>
+                                                <th>Area</th>
                                                 <th>Nilai Kematangan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($nilai_kematangan_variabel as $variabel => $nilai) { ?>
+                                            <?php foreach ($nilai_kematangan_area as $area => $nilai) { ?>
                                             <tr>
-                                                <td><?php echo htmlspecialchars($variabel); ?></td>
+                                                <td><?php echo htmlspecialchars($area); ?></td>
                                                 <td><?php echo number_format($nilai, 2); ?></td>
                                             </tr>
                                             <?php } ?>
@@ -195,12 +195,12 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
         var maturityChart = new Chart(ctx, {
             type: 'radar',
             data: {
-                labels: [<?php foreach ($nilai_kematangan_variabel as $variabel => $nilai) {
-                    echo '"' . htmlspecialchars($variabel) . '", ';
+                labels: [<?php foreach ($nilai_kematangan_area as $area => $nilai) {
+                    echo '"' . htmlspecialchars($area) . '", ';
                 } ?>],
                 datasets: [{
                     label: 'Nilai Kematangan',
-                    data: [<?php foreach ($nilai_kematangan_variabel as $nilai) {
+                    data: [<?php foreach ($nilai_kematangan_area as $nilai) {
                         echo number_format($nilai, 2) . ', ';
                     } ?>],
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -226,12 +226,12 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
         var maturityChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [<?php foreach ($nilai_kematangan_variabel as $variabel => $nilai) {
-                        echo '"' . htmlspecialchars($variabel) . '", ';
+                labels: [<?php foreach ($nilai_kematangan_area as $area => $nilai) {
+                        echo '"' . htmlspecialchars($area) . '", ';
                     } ?>],
                 datasets: [{
                     label: 'Nilai Kematangan',
-                    data: [<?php foreach ($nilai_kematangan_variabel as $nilai) {
+                    data: [<?php foreach ($nilai_kematangan_area as $nilai) {
                             echo number_format($nilai, 2) . ', ';
                         } ?>],
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',

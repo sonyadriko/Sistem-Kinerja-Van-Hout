@@ -3,7 +3,7 @@ include '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_data = $_GET['id'];
-    $nama = $_POST['project'];
+    $nama = $_POST['nama_project'];
     $query = "UPDATE project SET nama_project = '".$nama."' WHERE id_project = '".$id_data."'";
     $result = mysqli_query($conn, $query);
     if($result){

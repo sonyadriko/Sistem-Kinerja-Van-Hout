@@ -39,29 +39,30 @@ session_start();
                                             <tr>
                                                 <th>Area</th>
                                                 <th>Pertanyaan</th>
-                                                <th>Action</th>
+                                                <!-- <th>Action</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            $get_data = mysqli_query($conn, "SELECT kuesioner.area_id, kuesioner.pertanyaan, area.nama_area FROM kuesioner INNER JOIN area ON kuesioner.area_id = area.id_area");
+                                            $get_data = mysqli_query($conn, "SELECT kuesioner.id_kuesioner, kuesioner.area_id, kuesioner.pertanyaan, area.nama_area FROM kuesioner INNER JOIN area ON kuesioner.area_id = area.id_area");
                                             while($display = mysqli_fetch_array($get_data)) {
-                                                $id = $display['area_id'];
+                                                $id = $display['id_kuesioner'];
+                                                $idarea = $display['area_id'];
                                                 $name = $display['pertanyaan'];                                            
                                                 $areaName = $display['nama_area'];
                                             ?>
                                             <tr>
                                                 <td><?php echo $areaName; ?></td>
                                                 <td><?php echo $name; ?></td>
-                                                <td>
+                                                <!-- <td>
                                                     <div class="action-buttons">
-                                                        <a href='edit_data.php?GetID=<?php echo $id; ?>'
+                                                        <a href='ubah_kuesioner.php?GetID=<?php echo $id; ?>'
                                                             class="btn btn-primary btn-user">Ubah</a>
-                                                        <a href='delete_data.php?Del=<?php echo $id; ?>'
-                                                            class="btn btn-danger btn-user">Hapus</a>
+                                                        <button class="btn btn-danger btn-user delete-btn"
+                                                            data-id="<?php echo $id; ?>">Hapus</button>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             <?php
                                             $no++;
@@ -112,6 +113,49 @@ session_start();
                     "next": "<i class='bi bi-arrow-right'></i>"
                 }
             }
+        });
+        // Delete button click event
+        $('.delete-btn').on('click', function() {
+            const kuesionerID = $(this).data('id');
+            console.log("Kuesioner ID:", kuesionerID); // Debug log
+
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Data yang dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: 'delete_kuesioner.php',
+                        type: 'POST',
+                        data: {
+                            id_kuesioner: kuesionerID
+                        },
+                        success: function(response) {
+                            console.log("Response:", response); // Debug log
+                            Swal.fire(
+                                'Dihapus!',
+                                'Data berhasil dihapus.',
+                                'success'
+                            ).then(() => {
+                                window.location.reload();
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.log("Error:", error); // Debug log
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            );
+                        }
+                    });
+                }
+            });
         });
     });
     </script>
