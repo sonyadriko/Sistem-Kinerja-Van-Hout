@@ -39,7 +39,7 @@ session_start();
                                             <tr>
                                                 <th>Area</th>
                                                 <th>Pertanyaan</th>
-                                                <!-- <th>Action</th> -->
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -55,14 +55,14 @@ session_start();
                                             <tr>
                                                 <td><?php echo $areaName; ?></td>
                                                 <td><?php echo $name; ?></td>
-                                                <!-- <td>
+                                                <td>
                                                     <div class="action-buttons">
                                                         <a href='ubah_kuesioner.php?GetID=<?php echo $id; ?>'
                                                             class="btn btn-primary btn-user">Ubah</a>
-                                                        <button class="btn btn-danger btn-user delete-btn"
-                                                            data-id="<?php echo $id; ?>">Hapus</button>
+                                                        <!-- <button class="btn btn-danger btn-user delete-btn"
+                                                            data-id="<?php echo $id; ?>">Hapus</button> -->
                                                     </div>
-                                                </td> -->
+                                                </td>
                                             </tr>
                                             <?php
                                             $no++;

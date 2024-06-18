@@ -3,7 +3,7 @@ include '../config/database.php';
 session_start();
 
 // Ambil semua data jawaban, kuesioner, dan area
-$stmt = $conn->prepare('SELECT j.*, k.pertanyaan, k.area_id, a.nama_area FROM jawaban j LEFT JOIn kuesioner k ON j.kuesioner_id = k.id_kuesioner JOIN area a ON k.area_id = a.id_area');
+$stmt = $conn->prepare('SELECT j.*, k.pertanyaan, k.area_id, a.nama_area FROM jawaban j JOIn kuesioner k ON j.kuesioner_id = k.id_kuesioner JOIN area a ON k.area_id = a.id_area');
 $stmt->execute();
 $jawaban_result = $stmt->get_result();
 $jawaban_data = $jawaban_result->fetch_all(MYSQLI_ASSOC);
