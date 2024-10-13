@@ -35,6 +35,14 @@ $areas = $areas_result->fetch_all(MYSQLI_ASSOC);
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Laporan Project</h5>
+
+                                <form action="upload_excel.php" method="POST" enctype="multipart/form-data"
+                                    class="d-flex">
+                                    <input type="file" name="excelFile" class="form-control-file mr-2">
+                                    <button type="submit" class="btn btn-primary">Upload Excel</button>
+                                </form>
+                                <!-- <a href="hasil.php" class="btn btn-success btn-user ml-3">Hasil</a> -->
+                                <!-- </div> -->
                                 <a href="hasil.php" class="btn btn-success btn-user">Hasil</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
