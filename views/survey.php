@@ -135,7 +135,9 @@ if (isset($_GET['link'])) {
                             </div>
                             <div class="card-body">
                                 <form method="POST" action="submit_kuesioner.php">
-                                    <div class="form-group">
+                                    <input type="hidden" name="project_id"
+                                        value="<?php echo $project['id_project']; ?>">
+                                    <div class=" form-group">
                                         <label class="form-label" for="nama">Nama:</label>
                                         <input type="text" id="nama" name="nama" placeholder="Nama..." required>
                                     </div>

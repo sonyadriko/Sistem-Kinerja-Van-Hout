@@ -5,6 +5,7 @@ session_start();
 $areas_result = $conn->query("SELECT * FROM area");
 $areas = $areas_result->fetch_all(MYSQLI_ASSOC);
 
+$project_id = $_GET['GetID'];
 
 ?>
 <!DOCTYPE html>
@@ -39,11 +40,11 @@ $areas = $areas_result->fetch_all(MYSQLI_ASSOC);
                                 <form action="upload_excel.php" method="POST" enctype="multipart/form-data"
                                     class="d-flex">
                                     <input type="file" name="excelFile" class="form-control-file mr-2">
+                                    <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
                                     <button type="submit" class="btn btn-primary">Upload Excel</button>
                                 </form>
-                                <!-- <a href="hasil.php" class="btn btn-success btn-user ml-3">Hasil</a> -->
-                                <!-- </div> -->
-                                <a href="hasil.php" class="btn btn-success btn-user">Hasil</a>
+                                <a href="hasil.php?GetID=<?php echo $project_id?>"
+                                    class="btn btn-success btn-user">Hasil</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -58,7 +59,7 @@ $areas = $areas_result->fetch_all(MYSQLI_ASSOC);
                                         </thead>
                                         <tbody>
                                             <?php 
-                                            $get_data = mysqli_query($conn, "SELECT * FROM respondents");
+                                            $get_data = mysqli_query($conn, "SELECT * FROM respondents WHERE id_project = '$project_id'");
                                             while($display = mysqli_fetch_array($get_data)) {
                                                 $id = $display['id'];
                                                 $email = $display['email'];

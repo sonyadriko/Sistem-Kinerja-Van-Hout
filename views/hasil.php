@@ -2,8 +2,9 @@
 include '../config/database.php';
 session_start();
 
+$project_id = $_GET['GetID'];
 // Ambil semua data jawaban, kuesioner, dan area
-$stmt = $conn->prepare('SELECT j.*, k.pertanyaan, k.area_id, a.nama_area FROM jawaban j JOIn kuesioner k ON j.kuesioner_id = k.id_kuesioner JOIN area a ON k.area_id = a.id_area');
+$stmt = $conn->prepare("SELECT j.*, k.pertanyaan, k.area_id, a.nama_area FROM jawaban j JOIn kuesioner k ON j.kuesioner_id = k.id_kuesioner JOIN area a ON k.area_id = a.id_area JOIN respondents res ON j.respondents_id = res.id WHERE res.id_project = '$project_id'  ");
 $stmt->execute();
 $jawaban_result = $stmt->get_result();
 $jawaban_data = $jawaban_result->fetch_all(MYSQLI_ASSOC);

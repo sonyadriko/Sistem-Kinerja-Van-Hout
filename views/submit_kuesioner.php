@@ -8,10 +8,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $jawaban = $_POST['jawaban'];
     date_default_timezone_set('Asia/Jakarta');
     $date = date('Y-m-d H:i:s');
+    $project_id = isset($_POST['project_id']) ? $_POST['project_id'] : null;
+
 
     // Prepare the SQL statement to insert the user's name, email, and date
-    $stmt = $conn->prepare("INSERT INTO respondents (nama, email, date) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $nama, $email, $date);
+    $stmt = $conn->prepare("INSERT INTO respondents (id_project, nama, email, date) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $project_id, $nama, $email, $date);
 
     if ($stmt->execute()) {
         $respondent_id = $stmt->insert_id;

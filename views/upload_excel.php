@@ -43,10 +43,15 @@ if (isset($_FILES['excelFile'])) {
             $name = $data[$row][0];
             $email = $data[$row][1];
             $date = date('Y-m-d H:i:s'); // Format datetime dengan jam
+            // $project_id = $_GET['project_id'];
+            $project_id = isset($_POST['project_id']) ? $_POST['project_id'] : null;
+
+            
+
 
             // Insert ke tabel respondents
-            $stmt = $conn->prepare("INSERT INTO respondents (nama, email, date) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $name, $email, $date);
+            $stmt = $conn->prepare("INSERT INTO respondents (id_project, nama, email, date) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("isss", $project_id, $name, $email, $date);
             $stmt->execute();
             $respondents_id = $stmt->insert_id; // Ambil ID terakhir yang dimasukkan
 
