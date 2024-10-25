@@ -78,10 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Generate unique link
     $unique_link = md5(uniqid($project, true));
+    $date = date("d-m");
 
     // Prepare the SQL statement to avoid SQL injection
     $stmt = $conn->prepare("INSERT INTO project (user_id, nama_project, link) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $project, $unique_link);
+    $stmt->bind_param("iss", $user_id, $project, $date);
 
     // Execute the statement
     if ($stmt->execute()) {
@@ -92,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->close();
 
         // Construct the link to the questionnaire
-        $link_to_questionnaire = "https://localhost.com/survey.php?link=" . $unique_link;
+        $link_to_questionnaire = "https://localhost.com/survey.php?link=" . $date;
 
         // Use SweetAlert2 for success message
         echo "<script>";
