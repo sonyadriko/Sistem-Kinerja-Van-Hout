@@ -41,10 +41,10 @@ $project_id = $_GET['GetID'];
                                     class="d-flex">
                                     <input type="file" name="excelFile" class="form-control-file mr-2">
                                     <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
-                                    <button type="submit" class="btn btn-primary">Upload Excel</button>
+                                    <button type="submit" class="btn btn-user" style="background-color: #FFCC00; color:white;">Upload Excel</button>
                                 </form>
                                 <a href="hasil.php?GetID=<?php echo $project_id?>"
-                                    class="btn btn-success btn-user">Hasil</a>
+                                    class="btn btn-user" style="background-color: #ED1C24; color:white;">Hasil</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">

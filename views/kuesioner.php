@@ -29,7 +29,7 @@ session_start();
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Data Pertanyaan</h5>
-                                <a href="tambah_pertanyaan.php" class="btn btn-success btn-user">Tambah
+                                <a href="tambah_pertanyaan.php" class="btn btn-user"  style="background-color: #FFCC00; color:white;">Tambah
                                     Pertanyaan</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
