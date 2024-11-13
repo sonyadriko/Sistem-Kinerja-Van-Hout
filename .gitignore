@@ -1,0 +1,65 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore PHP dependency manager directories
+/vendor/
+/composer.lock
+
+# Ignore environment configuration files
+.env
+.env.*
+
+# Ignore IDE files
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+nbproject/
+
+# Ignore logs and cache files
+*.log
+/logs/
+/cache/
+/tmp/
+/storage/
+
+# Ignore session files
+*.session
+
+# Ignore uploaded files (adjust if you want to keep uploads)
+/uploads/
+
+# Ignore compiled templates (if using templating engines like Twig)
+/templates_c/
+/smarty/cache/
+/twig_cache/
+
+# Ignore PHPUnit test results
+/phpunit.xml
+/phpunit.xml.dist
+/tests/_output/
+
+# Ignore generated documentation
+/docs/
+/doc/
+
+# Ignore user-specific files
+*.swp
+*.bak
+*.backup
+*.tmp
+*.temp
+
+# Ignore OS-specific files
+ehthumbs.db
+Icon?
+.Spotlight-V100
+.Trashes
+
+# Ignore backup files
+*.~*
+
+/config/
+van_hout.sql
+van_hout_old.sql
