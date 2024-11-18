@@ -33,7 +33,7 @@ if (!isset($_SESSION['id_users'])) {
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Data User</h5>
-                                <a href="tambah_user.php" class="btn btn-user"  style="background-color: #FFCC00; color:white;">Tambah User</a>
+                                <a href="tambah_user.php" class="btn btn-user"  style="background-color: #ED1C24; color:white;">Tambah User</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">

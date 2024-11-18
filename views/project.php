@@ -29,7 +29,7 @@ session_start(); ?>
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5 class="card-title">Data Project</h5>
-                                <a href="tambah_project.php" class="btn btn-user" style="background-color: #FFCC00; color:white;">Tambah Project</a>
+                                <a href="tambah_project.php" class="btn btn-user" style="background-color: #ED1C24; color:white;">Tambah Project</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -60,14 +60,14 @@ session_start(); ?>
                                                 <td>
                                                     <div class="action-buttons">
                                                         <a href='ubah_project.php?GetID=<?php echo $id; ?>'
-                                                            class="btn btn-user" style="background-color: #FFCC00; color:white;">Ubah</a>
+                                                            class="btn btn-user" style="background-color: #ED1C24; color:white;">Ubah</a>
                                                         <!-- <button class="btn btn-danger btn-user delete-btn"
                                                             data-id="<?php echo $id; ?>">Hapus</button> -->
                                                         <!-- <button
                                                             onclick="copyToClipboard('https://localhost/van_hout/views/survey.php?link=<?php echo $unique_link; ?>')"
                                                             class="btn btn-warning btn-user">Share</button> -->
                                                         <a href='report.php?GetID=<?php echo $id; ?>'
-                                                            class="btn btn-user" style="background-color: #ED1C24; color:white;">Report</a>
+                                                            class="btn btn-user" style="background-color: #FFFFFF; color:#ED1C24;">Report</a>
                                                     </div>
                                                 </td>
                                             </tr>
