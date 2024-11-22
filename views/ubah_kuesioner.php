@@ -65,7 +65,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                             placeholder="Pertanyaan...">
                                     </div>
                                     <div class="d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-user" style="background-color: #ED1C24; color:white;">Submit</button>
                                     </div>
                                 </form>
                             </div>

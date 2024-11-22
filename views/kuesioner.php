@@ -33,8 +33,8 @@ session_start();
                                     Pertanyaan</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
-                                <div class="table-responsive">
-                                    <table id="areaTable" class="table table-hover table-bordered mb-0">
+                                <div class="">
+                                    <table id="areaTable" class="table table-hover table-bordered mb-0 p-3">
                                         <thead>
                                             <tr>
                                                 <th>Area</th>
@@ -58,7 +58,7 @@ session_start();
                                                 <td>
                                                     <div class="action-buttons">
                                                         <a href='ubah_kuesioner.php?GetID=<?php echo $id; ?>'
-                                                            class="btn btn-primary btn-user">Ubah</a>
+                                                            class="btn btn-user" style="background-color: #ED1C24; color:white;">Ubah</a>
                                                         <!-- <button class="btn btn-danger btn-user delete-btn"
                                                             data-id="<?php echo $id; ?>">Hapus</button> -->
                                                     </div>
