@@ -41,10 +41,12 @@ $project_id = $_GET['GetID'];
                                     class="d-flex">
                                     <input type="file" name="excelFile" class="form-control-file mr-2">
                                     <input type="hidden" name="project_id" value="<?php echo $project_id; ?>">
-                                    <button type="submit" class="btn btn-user" style="background-color: #FFFFFF; color:#ED1C24; border: 1px solid #ED1C24;">Upload Excel</button>
+                                    <button type="submit" class="btn btn-user"
+                                        style="background-color: #FFFFFF; color:#ED1C24; border: 1px solid #ED1C24;">Upload
+                                        Excel</button>
                                 </form>
-                                <a href="hasil.php?GetID=<?php echo $project_id?>"
-                                    class="btn btn-user" style="background-color: #ED1C24; color:white;">Hasil</a>
+                                <a href="hasil.php?GetID=<?php echo $project_id?>" class="btn btn-user"
+                                    style="background-color: #ED1C24; color:white;">Hasil</a>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -73,7 +75,8 @@ $project_id = $_GET['GetID'];
                                                 <td>
                                                     <div class="action-buttons">
                                                         <a href='show_data.php?GetID=<?php echo $id; ?>'
-                                                            class="btn btn-primary btn-user">Show</a>
+                                                            class="btn btn-user"
+                                                            style="background-color: #ED1C24; color:white;">Show</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -108,7 +111,8 @@ $project_id = $_GET['GetID'];
                                                 <td>
                                                     <div class="action-buttons">
 
-                                                        <a class="btn btn-primary btn-user"
+                                                        <a class="btn btn-user"
+                                                            style="background-color: #ED1C24; color:white;"
                                                             href="detail_hasil.php?area_id=<?php echo $area['id_area']; ?>">
                                                             Detail
                                                         </a>
