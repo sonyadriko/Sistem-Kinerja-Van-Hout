@@ -55,6 +55,20 @@ if (!isset($_SESSION['id_users'])) {
                                     memiliki akurasi yang memadai untuk mengambil kesimpulan yang dapat dipercaya dari
                                     populasi yang lebih besar.</p>
 
+                              
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card stretch stretch-full">
+
+                            <div class="card-body">
+                               
+
                                 <p style="font-size: medium;"><strong>Metode Van Hout</strong> penting dalam penelitian
                                     ilmiah karena memberikan
                                     landasan yang kuat untuk menentukan ukuran sampel yang optimal, menghindari sampel
