@@ -2,8 +2,9 @@
 include '../config/database.php';
 session_start(); 
 
-if (isset($_GET['area_id'])) {
+if (isset($_GET['area_id']) && isset($_GET['project_id'])) {
     $area_id = $_GET['area_id'];
+    $project_id = $_GET['project_id'];
 
     // Ambil data area
     $stmt = $conn->prepare("SELECT * FROM area WHERE id_area = ?");
@@ -19,12 +20,15 @@ if (isset($_GET['area_id'])) {
     $pertanyaan_result = $stmt->get_result();
     $pertanyaan_data = $pertanyaan_result->fetch_all(MYSQLI_ASSOC);
 
-    // Ambil jawaban kuesioner dari responden berdasarkan area
-    $stmt = $conn->prepare("SELECT r.nama, r.email, j.kuesioner_id, j.jawaban 
-                            FROM jawaban j 
-                            JOIN respondents r ON j.respondents_id = r.id 
-                            WHERE j.kuesioner_id IN (SELECT id_kuesioner FROM kuesioner WHERE area_id = ?)");
-    $stmt->bind_param("i", $area_id);
+    // Ambil jawaban kuesioner dari responden berdasarkan area dan project
+    $stmt = $conn->prepare(
+        "SELECT r.nama, r.email, j.kuesioner_id, j.jawaban 
+         FROM jawaban j 
+         JOIN respondents r ON j.respondents_id = r.id 
+         JOIN kuesioner kq ON j.kuesioner_id = kq.id_kuesioner
+         WHERE kq.area_id = ? AND r.id_project = ?"
+    );
+    $stmt->bind_param("ii", $area_id, $project_id);
     $stmt->execute();
     $jawaban_result = $stmt->get_result();
     $jawaban_data = $jawaban_result->fetch_all(MYSQLI_ASSOC);

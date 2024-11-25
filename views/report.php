@@ -93,7 +93,7 @@ $project_id = $_GET['GetID'];
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Daftar Area</h5>
+                                <h5 class="card-title">Daftar Variabel</h5>
                             </div>
                             <div class="card-body custom-card-action p-0">
                                 <div class="table-responsive">
@@ -111,9 +111,14 @@ $project_id = $_GET['GetID'];
                                                 <td>
                                                     <div class="action-buttons">
 
-                                                        <a class="btn btn-user"
+                                                        <!-- <a class="btn btn-user"
                                                             style="background-color: #ED1C24; color:white;"
                                                             href="detail_hasil.php?area_id=<?php echo $area['id_area']; ?>">
+                                                            Detail
+                                                        </a> -->
+                                                        <a class="btn btn-user"
+                                                            style="background-color: #ED1C24; color:white;"
+                                                            href="detail_hasil.php?area_id=<?php echo $area['id_area']; ?>&project_id=<?php echo $project_id; ?>">
                                                             Detail
                                                         </a>
                                                     </div>
