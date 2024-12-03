@@ -8,7 +8,7 @@ session_start();
     <?php include 'partials/scripts.php' ?>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
-    <title>Area</title>
+    <title>Variabel</title>
     <style>
     .action-buttons {
         display: flex;
@@ -28,7 +28,7 @@ session_start();
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Data Area</h5>
+                                <h5 class="card-title">Data Variabel</h5>
                                 <!-- <a href="add_data.php" class="btn btn-success btn-user">Tambah Data Area</a> -->
                             </div>
                             <div class="card-body custom-card-action p-0">

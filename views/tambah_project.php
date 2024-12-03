@@ -37,6 +37,10 @@ session_start(); ?>
                                         <input type="text" class="form-control" name="project"
                                             placeholder="Nama Project...">
                                     </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Tanggal :</label>
+                                        <input type="date" class="form-control" name="tanggal" required>
+                                    </div>
                                     <div class="d-flex justify-content-end">
                                         <button type="submit" class="btn btn-user"  style="background-color: #ED1C24; color:white;">Submit</button>
                                     </div>
@@ -75,14 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve the data from the form
     $user_id = $_SESSION['id_users'];
     $project = $_POST['project'];
+    $tanggal = $_POST['tanggal'];
 
     // Generate unique link
     $unique_link = md5(uniqid($project, true));
     $date = date("d-m");
 
     // Prepare the SQL statement to avoid SQL injection
-    $stmt = $conn->prepare("INSERT INTO project (user_id, nama_project, link) VALUES (?, ?, ?)");
-    $stmt->bind_param("iss", $user_id, $project, $date);
+    $stmt = $conn->prepare("INSERT INTO project (user_id, nama_project, link, tanggal) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("isss", $user_id, $project, $date, $tanggal);
 
     // Execute the statement
     if ($stmt->execute()) {
