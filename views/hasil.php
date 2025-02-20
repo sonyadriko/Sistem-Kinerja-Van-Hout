@@ -178,6 +178,38 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
                                                 <td><strong>Level Kematangan</strong></td>
                                                 <td><strong><?php echo $level_kematangan; ?></strong></td>
                                             </tr>
+                                            <tr>
+                                                <td><strong>Keterangan</strong></td>
+                                                <td>
+                
+                    <?php
+                    // Menentukan keterangan berdasarkan level kematangan
+                    $keterangan = "";
+                    switch ($level_kematangan) {
+                        case 1:
+                            $keterangan = "Level 1 menggambarkan tingkat kematangan kesesuaian strategi yang paling rendah. Organisasi yang berada pada level ini tidak dapat mencapai kesesuain strategi antara bisnis dan TI.";
+                            break;
+                        case 2:
+                            $keterangan = "Level 2 menunjukkan bahwa organisasi telah mulai menjalankan proses untuk meningkatkan kesesauaian strategi. Tingkat kesesuaian strategi ini terfokus pada situasi local atau unit fungsional dalam perusahaan,seperti pemasaran, keuangan, manukfaktur dan sumber daya manusia secara umum. Karena pemahaman yang terbatas oleh komunitas bisnis dan TI yang berada dalam unit fungsional yang beragam di perusahaan dalam pengunaan TI, pencapaian kesesuaian menjadi sulit. Beberapa tingkat kesesuaian bisnis-TI yang berfokus pada tingkat likal tidak memiliki dampak yang signifikan pada keseluruhan perusahaan. Meskipun demikian, peluang pontensional mulai diperkenalkan.";
+                            break;
+                        case 3:
+                            $keterangan = "Pada level 3 organisasi telah mengukuhkan tingkat kematangan kesesuaian strategi yang lebih terfokus. Level ini menitikberatkan pada tatakelola,proses,dan komunikasi yang bergerak menuju tujuan bisnis yang konkret. Teknologi informasi (TI) terintegrasi secara mendalam dalam operasional konkret. Level 3 memiliki dampak yang mencakup seluruh aset TI dalam perusahaan. Sistem aplikasi mengarah pada perencanaan dan pengaturan yang berfokus pada transpormasi dari pemrosesan tranksaksi konvensional ke sistem yang memanfaatkan infomasi untuk pengambilan keputusan bisnis. Infraktruktur TI juga berkembang dengan peran mitra kunci yang penting.";
+                            break;
+                        case 4:
+                            $keterangan = "Pada level 4 organisasi telah mengelola kematangan kesesuaian strategi dengan baik. Tingkat kesesuaian ini menunjukkan adopsi tata kelola dan layanan yang efektif dengan memperkuat peran TI sebagai pusat nilai. Organisasi pada Level 4 memiliki pengaruh terhadap seluruh aset TI dalam perusahaan. Fokus sistem aplikasi adalah meningkatkan kontrol atas proses bisnis untuk mendapatkan keunggulan kompetitif. Pada tingkat ini, organisasi melihat TI sebagai kontribusi strategi yang inovatif dan kreatif dalam mencapai keberhasilan.";
+                            break;
+                        case 5:
+                            $keterangan = "Tingkat level 5 menyatakan bahwa organisasi telah optimal, dimana kematangan kesesuaian strategi disesuaikan. Proses tata kelola mengintregasikan proses perencanaan strategi TI dengan proses bisnis strategi. Organisasi pada Level 5 apat mempengaruhi aset TI pada dasar perusahaan secara keseluruhan. Tujuanya untuk memperluas organisasi kedalam rantai persediaan pelanggan dan penyedia. Pada umumnya, organisasi sulit untuk mencapai Level 5 ini, organisasi pada level 5 lebih banyak pada perusahaan teknologi dari pada perusahaan berbentuk keamanan, asuransi, travel, dan perusahaan retail.";
+                            break;
+                        default:
+                            $keterangan = "Level kematangan tidak valid.";
+                            break;
+                    }
+                    echo $keterangan;
+                    ?>
+                
+            </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <br>
@@ -191,35 +223,51 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
         </div>
     </main>
     <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        var ctx = document.getElementById('maturityChart').getContext('2d');
-        var maturityChart = new Chart(ctx, {
-            type: 'radar',
-            data: {
-                labels: [<?php foreach ($nilai_kematangan_area as $area => $nilai) {
-                    echo '"' . htmlspecialchars($area) . '", ';
-                } ?>],
-                datasets: [{
-                    label: 'Nilai Kematangan',
-                    data: [<?php foreach ($nilai_kematangan_area as $nilai) {
-                        echo number_format($nilai, 2) . ', ';
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var ctx = document.getElementById('maturityChart').getContext('2d');
+
+            // Data nilai kematangan
+            var nilaiKematangan = [<?php foreach ($nilai_kematangan_area as $nilai) {
+                echo number_format($nilai, 2) . ', ';
+            } ?>];
+
+            // Menentukan warna titik berdasarkan nilai
+            var pointColors = nilaiKematangan.map(nilai => {
+                if (nilai >= 4) return 'green';  // 5 - Ungu
+                if (nilai >= 3) return 'blue';   // 4 - Hijau
+                if (nilai >= 2) return 'yellow';    // 3 - Biru
+                if (nilai >= 1) return 'red';  // 2 - Kuning
+                return 'red';                       // 1 - Merah
+            });
+
+            var maturityChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [<?php foreach ($nilai_kematangan_area as $area => $nilai) {
+                        echo '"' . htmlspecialchars($area) . '", ';
                     } ?>],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    r: {
-                        beginAtZero: true,
-                        max: 5
+                    datasets: [{
+                        label: 'Nilai Kematangan',
+                        data: nilaiKematangan,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        pointBackgroundColor: pointColors // Atur warna titik
+                    }]
+                },
+                options: {
+                    
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 5
+                        }
                     }
                 }
-            }
+            });
         });
-    });
     </script>
+
 </body>
 
 </html>
