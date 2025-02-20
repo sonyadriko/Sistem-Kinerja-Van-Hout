@@ -100,7 +100,7 @@ $project_id = $_GET['GetID'];
                                     <table id="reportTable2" class="table table-hover table-bordered mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Nama Area</th>
+                                                <th>Variabel</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

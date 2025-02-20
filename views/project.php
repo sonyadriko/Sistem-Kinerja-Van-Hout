@@ -38,7 +38,8 @@ session_start(); ?>
                                             <tr>
                                                 <!-- <th>User</th> -->
                                                 <th>Nama Project</th>
-                                                <th>Link</th>
+                                                <th>Tanggal</th>
+                                                <!-- <th>Link</th> -->
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -51,12 +52,14 @@ session_start(); ?>
                                                 $name = $display['nama_project'];
                                                 $userId = $display['user_id'];
                                                 $unique_link = $display['link'];
+                                                $tanggal = $display['tanggal'];
                                             ?>
                                             <tr>
                                                 <!-- <td><?php echo $userId; ?></td> -->
                                                 <td><?php echo $name; ?></td>
-                                                <td><?php echo  "https://localhost/van_hout/views/survey.php?link=" .
-                                            $unique_link; ?></td>
+                                                <td><?php echo strftime('%d %B %Y', strtotime($tanggal)); ?></td>
+                                                <!-- <td><?php echo  "https://localhost/van_hout/views/survey.php?link=" .
+                                            $unique_link; ?></td> -->
                                                 <td>
                                                     <div class="action-buttons">
                                                         <a href='ubah_project.php?GetID=<?php echo $id; ?>'

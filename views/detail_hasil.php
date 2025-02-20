@@ -77,7 +77,7 @@ if (isset($_GET['area_id']) && isset($_GET['project_id'])) {
     <?php include 'partials/scripts.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Jawaban Area: <?php echo htmlspecialchars($area['nama_area']); ?></title>
+    <title>Detail Jawaban Variabel: <?php echo htmlspecialchars($area['nama_area']); ?></title>
     <style>
     table {
         width: 100%;
@@ -108,7 +108,7 @@ if (isset($_GET['area_id']) && isset($_GET['project_id'])) {
                     <div class="col-lg-12">
                         <div class="card stretch stretch-full">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title">Detail Jawaban Responden - Area:
+                                <h5 class="card-title">Detail Jawaban Responden - Variabel:
                                     <?php echo htmlspecialchars($area['nama_area']); ?></h5>
                             </div>
                             <div class="card-body">

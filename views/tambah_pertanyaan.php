@@ -33,7 +33,7 @@ session_start();
                             <div class="card-body">
                                 <form method="POST" action="tambah_pertanyaan.php" id="formTambahPertanyaan">
                                     <div class=" mb-4">
-                                        <label class="form-label">Area :</label>
+                                        <label class="form-label">Variabel :</label>
                                         <select class="form-select form-control" name="area_id"
                                             data-select2-selector="tag1">
                                             <?php

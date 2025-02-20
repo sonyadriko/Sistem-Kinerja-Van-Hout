@@ -23,7 +23,7 @@
                 <li class="nxl-item nxl-hasmenu">
                     <a href="area.php" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-map"></i></span>
-                        <span class="nxl-mtext">Area</span>
+                        <span class="nxl-mtext">Variabel</span>
                     </a>
                 </li>
                 <li class="nxl-item nxl-hasmenu">

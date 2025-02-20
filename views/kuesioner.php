@@ -37,7 +37,7 @@ session_start();
                                     <table id="areaTable" class="table table-hover table-bordered mb-0 p-3">
                                         <thead>
                                             <tr>
-                                                <th>Area</th>
+                                                <th>Variabel</th>
                                                 <th>Pertanyaan</th>
                                                 <th>Action</th>
                                             </tr>
