@@ -256,7 +256,6 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
                     }]
                 },
                 options: {
-                    
                     scales: {
                         r: {
                             beginAtZero: true,
