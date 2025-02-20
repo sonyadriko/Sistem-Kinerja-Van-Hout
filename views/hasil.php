@@ -220,37 +220,6 @@ if ($nilai_kematangan_perusahaan >= 0 && $nilai_kematangan_perusahaan <= 1.99) {
         });
     });
     </script>
-    <!-- grafik batang -->
-    <!-- <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        var ctx = document.getElementById('maturityChart').getContext('2d');
-        var maturityChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: [<?php foreach ($nilai_kematangan_area as $area => $nilai) {
-                        echo '"' . htmlspecialchars($area) . '", ';
-                    } ?>],
-                datasets: [{
-                    label: 'Nilai Kematangan',
-                    data: [<?php foreach ($nilai_kematangan_area as $nilai) {
-                            echo number_format($nilai, 2) . ', ';
-                        } ?>],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        max: 5
-                    }
-                }
-            }
-        });
-    });
-    </script> -->
 </body>
 
 </html>

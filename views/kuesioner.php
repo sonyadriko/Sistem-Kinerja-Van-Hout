@@ -59,8 +59,8 @@ session_start();
                                                     <div class="action-buttons">
                                                         <a href='ubah_kuesioner.php?GetID=<?php echo $id; ?>'
                                                             class="btn btn-user" style="background-color: #ED1C24; color:white;">Ubah</a>
-                                                        <!-- <button class="btn btn-danger btn-user delete-btn"
-                                                            data-id="<?php echo $id; ?>">Hapus</button> -->
+                                                        <button class="btn btn-danger btn-user delete-btn"
+                                                            data-id="<?php echo $id; ?>">Hapus</button>
                                                     </div>
                                                 </td>
                                             </tr>
